@@ -1,0 +1,33 @@
+.modalContainer{
+    margin-bottom: 10px;
+}
+.mainContent{
+    display: flex;
+    flex-direction: column;
+}
+.actions{
+    display: flex;
+    flex-direction: column;
+}
+.contentBox{
+    height: 150px;
+    margin: 5px 15px;
+}
+
+.titleBox{
+   text-align: center;
+   margin: 5px 30px;
+}
+.extra.content{
+    display: flex;
+    justify-content: space-evenly;
+}
+.ui.two.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    position: relative;
+}
+.ui.two.buttons button{
+margin: 5px;
+}
