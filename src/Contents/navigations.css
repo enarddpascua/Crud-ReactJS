@@ -1,0 +1,53 @@
+.navigations{
+    margin-top: 50px;
+}
+
+.navigations a{
+    color: rgb(5, 24, 34);
+    text-decoration: none;
+    margin: 50px 10px;
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    }
+
+
+    #flyoutMenu {
+        width: 30vw;
+        height: 100vh;
+        background-color: rgb(235, 233, 221);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: transform .4s cubic-bezier(0, .52, 0, 1);
+        z-index: 1000;
+      }
+       
+      #flyoutMenu.hide {
+        transform: translate3d(-30vw, 0, 0);
+      }
+       
+      #flyoutMenu.show {
+        transform: translate3d(-10vw, 0, 0);
+        overflow: hidden;
+      }
+   
+      #flyoutMenu a:hover {
+        text-decoration: underline;
+      }
+
+@media only screen and (max-width: 680px){
+
+    #flyoutMenu.show {
+        transform: translate3d(0vw, 0, 0);
+        overflow: hidden;
+      }
+      .navigations a{
+        font-size: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        }
+}
+

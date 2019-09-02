@@ -7,6 +7,7 @@ import LeftAside from './Contents/LeftAside';
 import Navigations from './Contents/Navigations';
 import Modal from './Contents/Modal';
 import Popup from 'reactjs-popup';
+import NavButton from './Contents/NavButton';
 import axios from 'axios';
 
 
@@ -40,7 +41,20 @@ class App extends React.Component {
       name: "",
       emailaddress: "",
       pw:"",
-      confirmpw:""
+      confirmpw:"",
+      visible: false,
+    }
+
+  handleMouseDown = (e) => {
+      this.toggleMenu();
+      console.log("clicked");
+      e.stopPropagation();
+    }
+
+  toggleMenu = () => {
+      this.setState({
+          visible: !this.state.visible
+      })
     }
 
   handleNameReg = (e) =>{
@@ -96,13 +110,6 @@ class App extends React.Component {
     return true;
   }
   }
-
-  // validatingPassword = () =>{
-  //   let passwordInc = "";
-  //   if(this.state.password !== getPw.pwvalidation.password && ){
-  //     passwordInc = "Username or Password is incorrect.";
-  //   }
-  // }
 
   onPressLogin = (e) => {
     e.preventDefault();
@@ -333,7 +340,7 @@ class App extends React.Component {
         const getStash = storageSave.map((storageSave, i) =>(
           
     
-        <div id={i} className="mainContent">
+        <div id={i} className="mainContent" key = {i}>
 
         <div id={i} className = "topContent">
         <p id={i} className = "timeDate">
@@ -341,20 +348,21 @@ class App extends React.Component {
         </p>
         <button onClick = {this.onRemoveArticle} id={i} className="ui inverted red button" value = "deleteButton">X</button>
         </div>
+        
         <h1 id={i} className="title">
           {storageSave.head}
           </h1>
         <p id={i} className="body">
           {storageSave.body}
         </p>
-        <div className="actions">
+        <div className = "actions">
         <button onClick = {this.onPressedShowEdit}
         value = "editButton"
             id={i}
             className="ui teal button">
             Edit
           </button>
-        </div>
+          </div>
       </div>
     ));
     
@@ -370,7 +378,6 @@ class App extends React.Component {
         })
         localStorage.removeItem('token');
         window.location.reload();
-        console.log(e.target.value)
       }
 
     onRemoveArticle = (e) => {
@@ -406,13 +413,14 @@ class App extends React.Component {
       
   render() {
     return(
-<div>
+<div className = "root">
   <div>
 
     <div hidden = {this.state.loginPage}>
+
     <div className = "mainAuthDiv" >
 
-          <form className = "actions">
+          <form className = "actions1">
               <img src = "logo.png" alt = "logo" className = "authLogo"/>
               <input onChange = {this.handlingUsername} className = "userName" name = "email" placeholder = "email"/>
               <div className = "emailError">{this.state.emailError}</div>
@@ -460,17 +468,15 @@ class App extends React.Component {
             <img className = "logo" src= "logo.png" alt = "Logo goes here"/>
             </div>
             <div className = "searchInput">
-              <input type = "text" placeholder = "Seach.."/>
-              <button type = "button">Search</button>
+              <input type = "text" className = "inputSearch" placeholder = "Seach.."/>
+              <button type = "button" className = "buttonForSearch">Search</button>
               <button type = "button" onClick = {this.onLogOut} value = "buttonLogout" className = "ui red button">Logout</button>
             </div>
       </header>
 
-      <div className = "navigationBar">
-      <nav className = "navigations">
-        <Navigations/>
-      </nav>
-      </div>
+      <div id = "mySideNav">
+        <Navigations handleMouseDown = {this.handleMouseDown} menuVisibility = {this.state.visible}/> 
+        </div>
 
     <div className = "middleContent">
 
@@ -489,9 +495,12 @@ class App extends React.Component {
       
 
       <div className = "middle">
+        <div className = "titleAndCreate">
+      <NavButton handleMouseDown = {this.handleMouseDown} className = "buttonForLinks"/>
         <h1>This is a title</h1>
         <h6>Welcomes you to this page</h6>
         <button onClick = {this.onPressedCreate} value = "buttonCreate" className = "ui orange button" type = "button">Compose New Article</button>
+        </div>
         <div className = "modalContainer">
       {this.state.showModal ? <Modal onClick = {this.onPressedDestroy}/> : null}
       </div>
@@ -509,26 +518,23 @@ class App extends React.Component {
       </div>
 
       <Popup closeOnDocumentClick={false} open={this.state.open} onClose={this.onPressedDestroy}>
-       
-            <div className = "modal-content">
+        <div className = "modal-content">      
             <form className = "forEdit">
                 <input onChange = {this.handlingInputChange} className = "forEditInput" type = "text" placeholder = "title" />
                 <textarea onChange = {this.handlingContentChange} className = "forEditTextArea" type = "text" placeholder = "content"/>
             </form>
             <div className = "buttonsForEdit">
-                    <button onClick = {this.handleSaveButton} value = "saveButton" className = "ui inverted green button">
-                    Save
-                    </button>
-                    <button className ="ui inverted red button" onClick = {this.onPressedDestroy}>
+                    <button onClick = {this.handleSaveButton} value = "saveButton" className = "ui green button"> Save </button>
+                    <button className = "negative ui button" onClick = {this.onPressedDestroy}>
                         Cancel
                     </button>
                 </div>
-            </div>
-       
-
+        </div>
       </Popup>
+
+
       <aside className = "right">
-        <RightAside header = "Login"/>
+        <RightAside />
       </aside>
     </div>
     <footer>

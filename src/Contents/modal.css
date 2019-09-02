@@ -1,33 +1,59 @@
 .modalContainer{
     margin-bottom: 10px;
 }
-.mainContent{
+.mainContent1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.actions1{
     display: flex;
     flex-direction: column;
 }
-.actions{
-    display: flex;
-    flex-direction: column;
-}
-.contentBox{
+.contentBox1{
     height: 150px;
     margin: 5px 15px;
 }
 
-.titleBox{
+.titleBox1{
    text-align: center;
    margin: 5px 30px;
 }
-.extra.content{
+.extra.content1{
     display: flex;
     justify-content: space-evenly;
+    margin-bottom: 5px;
+    width: 100%;
 }
-.ui.two.buttons{
-    display: flex;
-    flex-direction: row;
-    width: 300px;
-    position: relative;
-}
-.ui.two.buttons button{
+
+.extra.content1 button{
 margin: 5px;
+width: 200px;
+}
+
+@media only screen and (max-width: 680px){
+    .mainContent1{
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+
+    .extra.content1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .extra.content1 button{
+        width: 90%;
+    }
+
 }

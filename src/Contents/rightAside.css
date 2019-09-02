@@ -1,10 +1,10 @@
 .rightTitle{
     text-align: center;
 }
-.ad1{
-    display: absolute;
-    text-align: center;
-}
-.ad2{
-    margin: 10px;
+.rootDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
 }

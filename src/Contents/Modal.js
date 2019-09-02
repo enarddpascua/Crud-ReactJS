@@ -44,22 +44,21 @@ class Modal extends React.Component{
 render(){
     return (
         
-       <div className="mainContent">
-            <div className = "content">
-            <form className = "actions">
-                <input className = "titleBox" onChange = {this.onInputChange} type = "text" placeholder = "enter title.."/>
-                <textarea className ="contentBox" placeholder = "type here.." onChange = {this.onInputChangeAgain}/>
+       <div className="mainContent1">
+            <div className = "content1">
+            <form className = "actions1">
+                <input className = "titleBox1" onChange = {this.onInputChange} type = "text" placeholder = "enter title.."/>
+                <textarea className ="contentBox1" placeholder = "type here.." onChange = {this.onInputChangeAgain}/>
             </form>
             </div>
-           <div className = "extra content">
-                <div className = "ui two buttons">
-                    <button className = "ui inverted green button" onClick = {this.handleAddStorage} value = "buttonAdd">
+           <div className = "extra content1">
+
+                    <button className = "ui green button" onClick = {this.handleAddStorage} value = "buttonAdd">
                     Add
                     </button>
-                    <button className ="ui inverted red button" onClick = {this.props.onClick}>
+                    <button className ="negative ui button" onClick = {this.props.onClick}>
                         Cancel
                     </button>
-                </div>
             </div>
         </div>
     )
