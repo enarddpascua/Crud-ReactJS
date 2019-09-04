@@ -10,6 +10,7 @@ class Navigations extends React.Component {
         if (this.props.menuVisibility) {
         visibility = "show";
         }
+        
         return(
             <div id = "flyoutMenu" onMouseDown = {this.props.handleMouseDown} className= {visibility}>
             <nav className = "navigations">

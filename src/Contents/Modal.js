@@ -7,23 +7,22 @@ class Modal extends React.Component{
     state = {
         inputTitle:"",
         inputContent:"",
-        dateCreated:""
+        dateCreated:"",
     }
     onInputChange = (e) =>{
         this.setState({
           inputTitle: e.target.value,
         })
-        console.log(e.target.value)
       }
       onInputChangeAgain = (e) => {
         this.setState({
           inputContent: e.target.value
         })
-        console.log(e.target.value)
       }
 
       handleAddStorage = (event) =>{
         event.preventDefault();
+
         let storageSave = localStorage.getItem("items")
         ? JSON.parse(localStorage.getItem("items"))
         : [];
@@ -33,18 +32,21 @@ class Modal extends React.Component{
         var post = {
           head: this.state.inputTitle,
           body: this.state.inputContent,
-          dateCreated: new Date()
+          dateCreated: new Date(),
         }
     
         storageSave.push(post)
         localStorage.setItem("items", JSON.stringify(storageSave));
-        window.location.reload(true);
+        window.location.reload();
+    
 }
    
 render(){
+
     return (
-        
-       <div className="mainContent1">
+      
+      
+       <div id="mainContent1">
             <div className = "content1">
             <form className = "actions1">
                 <input className = "titleBox1" onChange = {this.onInputChange} type = "text" placeholder = "enter title.."/>

@@ -57,6 +57,17 @@ class App extends React.Component {
       })
     }
 
+    onPressedCreate = (e) => {
+      this.showModal();
+      e.stopPropagation();
+  }
+
+  showModal = () =>{
+    this.setState({
+      showModal: !this.state.showModal,
+    })
+  }
+
   handleNameReg = (e) =>{
     this.setState({ name: e.target.value })
     console.log(this.state.name)
@@ -233,8 +244,6 @@ class App extends React.Component {
       const getData = {
         user: res.data
       }
-   
-      
       saveStorage.push(getData)
       localStorage.setItem("user", JSON.stringify(saveStorage));
       
@@ -242,8 +251,6 @@ class App extends React.Component {
       
   });
 }
-
-
   onPressSignUp = (e) => {
     e.preventDefault();
      console.log(e.target.value)
@@ -262,20 +269,13 @@ class App extends React.Component {
     console.log(this.state.showSignUpForm)
   }
 
-  onPressedCreate = (e) => {
-      e.preventDefault();
-      this.setState({
-        showModal: true,
-      })
-     
-  }
-
     onPressedShowEdit = (e) => {
     this.setState({
         idHead: e.target.id,
         open: true
     })
-   
+    
+
   }
 
   handlingInputChange = (e) =>{
@@ -283,9 +283,11 @@ class App extends React.Component {
       editTitle: e.target.value
     })
   }
+  
   handlingContentChange = (e) => {
+    let id = e.target.value
     this.setState({
-      editContent: e.target.value
+      editContent: id
     })
   }
 
@@ -294,7 +296,7 @@ class App extends React.Component {
     let id = this.state.idHead
     let storageSave = JSON.parse(localStorage.getItem("items"))
     
-    var secondPost = {
+    const secondPost = {
       title: this.state.editTitle,
       content: this.state.editContent
     }
@@ -302,10 +304,12 @@ class App extends React.Component {
     storageSave[id].head = secondPost.title
     storageSave[id].body = secondPost.content
     localStorage.setItem("items", JSON.stringify(storageSave))
+    
     this.setState({
       open: false
     })
     this.graspLocalStore();
+    window.location.reload();
   }
 
 
@@ -358,20 +362,19 @@ class App extends React.Component {
         <div className = "actions">
         <button onClick = {this.onPressedShowEdit}
         value = "editButton"
-            id={i}
+          id={i}
             className="ui teal button">
             Edit
           </button>
           </div>
       </div>
     ));
-    
     this.setState({
-      article: getStash
+      article: getStash,
     })    
         }
 
-      onLogOut = (e) => {
+      onLogOut = () => {
         this.setState({
           mainPage: true,
           loginPage: false
@@ -429,7 +432,7 @@ class App extends React.Component {
               <div className = "passwordError">{this.state.passwordError}</div>
               <div className = "buttonsAuth">
               <button className = "ui blue button" onClick = {this.onPressLogin}>Login</button>
-              <button href = "/" onClick = {this.onPressSignUp} className = "ui blue button" value = "sign up link">Sign up</button>
+              <button onClick = {this.onPressSignUp} className = "ui blue button" value = "sign up link">Sign up</button>
               </div>
           </form>
     </div>
@@ -496,13 +499,14 @@ class App extends React.Component {
 
       <div className = "middle">
         <div className = "titleAndCreate">
-      <NavButton handleMouseDown = {this.handleMouseDown} className = "buttonForLinks"/>
+      <NavButton handleMouseDown = {this.handleMouseDown} />
         <h1>This is a title</h1>
         <h6>Welcomes you to this page</h6>
-        <button onClick = {this.onPressedCreate} value = "buttonCreate" className = "ui orange button" type = "button">Compose New Article</button>
+       <button onClick = {this.onPressedCreate} value = "buttonCreate" className = "ui orange button" type = "button">Compose New Article</button> 
         </div>
-        <div className = "modalContainer">
-      {this.state.showModal ? <Modal onClick = {this.onPressedDestroy}/> : null}
+        
+      <div className = "modalContainer">
+      {this.state.showModal ? <Modal onClick = {this.onPressedDestroy} modalVisibility = {this.state.showModal}/> : null}
       </div>
      
       <div className = "middlePointOne">
@@ -517,10 +521,10 @@ class App extends React.Component {
       </div>
       </div>
 
-      <Popup closeOnDocumentClick={false} open={this.state.open} onClose={this.onPressedDestroy}>
+      <Popup closeOnDocumentClick={false} open={this.state.open} onClose={this.onPressedDestroy} className = "modalPop">
         <div className = "modal-content">      
             <form className = "forEdit">
-                <input onChange = {this.handlingInputChange} className = "forEditInput" type = "text" placeholder = "title" />
+                <input onChange = {this.handlingInputChange} className = "forEditInput" type = "text" placeholder = "title"/>
                 <textarea onChange = {this.handlingContentChange} className = "forEditTextArea" type = "text" placeholder = "content"/>
             </form>
             <div className = "buttonsForEdit">

@@ -5,6 +5,19 @@
   background-size: cover;
 }
 
+button{
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+}
+
+button:hover{
+  cursor: pointer;
+  transform: scale(1.1, 1.1);
+}
+.ui.teal.button{
+  width: 100px;
+  margin-bottom: 5px;
+}
+
 .headerPortion{
   display: flex;
   flex-direction: row;
@@ -70,15 +83,22 @@
 }
 
 .ui.orange.button{
-  font-size: 25px;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
+  font-size: 20px;
   border-radius: 5px;
   margin: 0 auto;
   color: rgb(40, 36, 36);
   width: 300px;
 }
 
+.ui.orange.button:hover{
+  background-color: rgba(249, 97, 2, 0.851);
+  cursor: pointer;
+}
+
 .ui.red.button{
   margin-left: 10px;
+  transition: all .2s cubic-bezier(0, 1.26, .8, 1.28);
 }
 
 .middlePointOne{
@@ -168,10 +188,6 @@
   display: flex;
   justify-content: flex-end;
 }
-.ui.teal.button{
-  width: 100px;
-  margin-bottom: 5px;
-}
 
 .forEdit{
   display: flex;
@@ -236,9 +252,11 @@
   margin-bottom: 10px;
   height: 200px;
   border: 5px solid lightblue;
-  animation:slide-in-blurred-top .5s cubic-bezier(.23,1.000,.32,1.000) both
+  animation: bang1 .5s cubic-bezier(.23,1.000,.32,1.000) both
 }
-@keyframes slide-in-blurred-top{0%{transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}100%{transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}}
+@keyframes bang1{
+  0%{transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}
+  100%{transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}}
 
 
 
@@ -269,10 +287,23 @@
 }
 
 .emailError, .passwordError{
-  color:red;
+  color:white;
+  background-color: rgb(184, 75, 75);
+  border-radius: 5px; 
   font-size: 15px;
   text-align: center;
   font-weight: bold;
+  margin: 5px 0 5px 0;
+  animation: show 1s ease-in-out;
+
+}
+@keyframes show {
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
 
 .mainDivReg{
@@ -431,3 +462,20 @@
 margin-bottom: 15px;
 }
 }
+ @media only screen and (max-width: 680px) and (orientation: landscape){
+  
+  .modal-content{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .forEdit input{
+    width: 100%;
+    height: 50%;
+  }
+  .forEdit textarea{
+    width: 100%;
+    height: 90%;
+  }
+  
+} 
